@@ -24,8 +24,8 @@ class AuthTest {
         var registeredUser = getRegisteredUser("active");
         $("[data-test-id=\"login\"]").setValue(registeredUser.getLogin());
         $("[data-test-id=\"password\"]").setValue(registeredUser.getPassword());
-        $("[text()='Продолжить']").click();
-        $("[data-test-id=\"error-notification\"]").shouldHave(Condition.visible);
+        $(".button").click();
+        $("[class=\"notification__title\"]").shouldBe(Condition.visible);
     }
 
     @Test
@@ -34,8 +34,8 @@ class AuthTest {
         var notRegisteredUser = getUser("active");
         $("[data-test-id=\"login\"]").setValue(notRegisteredUser.getLogin());
         $("[data-test-id=\"password\"]").setValue(notRegisteredUser.getPassword());
-        $("[text()='Продолжить']").click();
-        $("[data-test-id=\"error-notification\"]").shouldHave(Condition.visible);
+        $(".button").click();
+        $("[data-test-id=\"error-notification\"]").shouldBe(Condition.visible);
     }
 
     @Test
@@ -44,8 +44,8 @@ class AuthTest {
         var blockedUser = getRegisteredUser("blocked");
         $("[data-test-id=\"login\"]").setValue(blockedUser.getLogin());
         $("[data-test-id=\"password\"]").setValue(blockedUser.getPassword());
-        $("[text()='Продолжить']").click();
-        $("[data-test-id=\"error-notification\"]").shouldHave(Condition.visible);
+        $(".button").click();
+        $("[data-test-id=\"error-notification\"]").shouldBe(Condition.visible);
     }
 
     @Test
@@ -53,10 +53,10 @@ class AuthTest {
     void shouldGetErrorIfWrongLogin() {
         var registeredUser = getRegisteredUser("active");
         var wrongLogin = getRandomLogin();
-        $("[data-test-id=\"login\"]").setValue(wrongLogin.getLogin());
+        $("[data-test-id=\"login\"]").setValue(wrongLogin);
         $("[data-test-id=\"password\"]").setValue(registeredUser.getPassword());
-        $("[text()='Продолжить']").click();
-        $("[data-test-id=\"error-notification\"]").shouldHave(Condition.visible);
+        $(".button").click();
+        $("[data-test-id=\"error-notification\"]").shouldBe(Condition.visible);
     }
 
     @Test
@@ -65,8 +65,8 @@ class AuthTest {
         var registeredUser = getRegisteredUser("active");
         var wrongPassword = getRandomPassword();
         $("[data-test-id=\"login\"]").setValue(registeredUser.getLogin());
-        $("[data-test-id=\"password\"]").setValue(wrongPassword.getPassword());
-        $("[text()='Продолжить']").click();
-        $("[data-test-id=\"error-notification\"]").shouldHave(Condition.visible);
+        $("[data-test-id=\"password\"]").setValue(wrongPassword);
+        $(".button").click();
+        $("[data-test-id=\"error-notification\"]").shouldBe(Condition.visible);
     }
 }
